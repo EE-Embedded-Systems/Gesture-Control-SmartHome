@@ -10,7 +10,7 @@ detector = HandDetector(maxHands=1)
 offset = 20
 imgSize = 300
 
-folder = "C:\\Users\\ptar124\\handrec\\HandSignDetection\\Data\\A"
+folder = r"C:\Users\ptar124\handrec\Gesture-Control\HandSignDetection\Data\A"
 counter = 0
 
 while True:
