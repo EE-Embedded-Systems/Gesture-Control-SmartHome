@@ -26,7 +26,7 @@ model = load_model('/Users/marcochan/Desktop/Github/Gesture-Control/Gesture-Cont
 
 # Initialize the webcam
 cap = cv2.VideoCapture(0)
-with open("/Users/marcochan/Desktop/Github/Gesture-Control/Gesture-Control/Data/thumbs_up.csv", "a") as text_file:
+with open("/Users/marcochan/Desktop/Github/Gesture-Control/Gesture-Control/Data/thumbs_down.csv", "a") as text_file:
     for i in range(1,22):
         print("x"+str(i) + ",y"+str(i)+ ",z"+ str(i), file=text_file, end=",")
     print('\n', file=text_file, end="")
@@ -51,7 +51,7 @@ while True:
     # post process the result
     if result.multi_hand_landmarks:
         landmarks = []
-        with open("/Users/marcochan/Desktop/Github/Gesture-Control/Gesture-Control/Data/thumbs_up.csv", "a") as text_file:
+        with open("/Users/marcochan/Desktop/Github/Gesture-Control/Gesture-Control/Data/thumbs_down.csv", "a") as text_file:
             for handslms in result.multi_hand_landmarks:
                 for lm in handslms.landmark:
                     # print(id, lm)

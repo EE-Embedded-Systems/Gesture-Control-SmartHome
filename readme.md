@@ -8,6 +8,8 @@ pip install mediapipe
 pip install tensorflow
 pip install cvzone
 pip install opencv-python
+pip install torch
+pip install scikit-learn
 ```
 
 
