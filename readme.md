@@ -32,6 +32,9 @@ Batch_Size - 512
 Neurons - [33 33]
 Learning_rate - 0.01
 
+## Test the NN Model in real time
+Run `python real_time_detection.py`. A video camera screen will pop up and it should detect your hand gestures. Press q to quit the program. 
+
 
 ## How to scale up number of gestures?
 

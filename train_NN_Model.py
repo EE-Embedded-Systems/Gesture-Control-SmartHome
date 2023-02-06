@@ -278,9 +278,7 @@ class Classifier:
             {np.ndarray} -- Predicted value for the given input (batch_size, 1).
 
         """
-
-        x_processed, _ = self._preprocessor(x, training=False)
-        return self.model(x_processed.float()).cpu().detach().numpy()
+        return self.model(x.float()).cpu().detach().numpy()
 
     def score(self, x, y):
         """
@@ -357,6 +355,19 @@ def save_classifier(trained_model):
         pickle.dump(trained_model, target)
     print("\nSaved model in gesture_recognition_model.pickle\n")
 
+# Load the gesture recognizer model
+
+
+def load_regressor():
+    """
+    Utility function to load the trained regressor model in gesture_recongnition_model.pickle.
+    """
+    # If you alter this, make sure it works in tandem with save_regressor
+    with open("/Users/marcochan/Desktop/Github/Gesture-Control/Gesture-Control/gesture_recognition_model.pickle", "rb") as target:
+        trained_model = pickle.load(target)
+    print("\nLoaded model in gesture_recongnition_model.pickle\n")
+    return trained_model
+
 
 def confusion_matrix(y_predicted, y_gold):
     """ Construct Confusion Matrix
@@ -430,5 +441,42 @@ def train_one_model():
     save_classifier(classifier)
 
 
+def test_load_model():
+
+    classifier = load_regressor()
+    # Use pandas to read CSV data as it contains various object types
+    fist_data = pd.read_csv("Data/fist.csv")
+    thumbs_down_data = pd.read_csv("Data/thumbs_down.csv")
+    thumbs_up_data = pd.read_csv("Data/thumbs_up.csv")
+    combined_data = pd.concat([fist_data, thumbs_down_data, thumbs_up_data])
+
+    # Changing label into values. This is to allow calculation of loss function with cross entropy
+    label_map = {'fist': 0, 'thumbs_down': 1, 'thumbs_up': 2}
+    combined_data['label'] = combined_data['label'].map(label_map)
+
+    # Split Datasets into Train and Test DataSets
+    train, val, test = split_dataset(combined_data)
+    output_label = "label"
+    # Split Input and Output
+    x_train, x_validation, x_test = (
+        train.loc[:, combined_data.columns != output_label],
+        val.loc[:, combined_data.columns != output_label],
+        test.loc[:, combined_data.columns != output_label],
+    )
+    y_train, y_validation, y_test = (
+        train.loc[:, [output_label]],
+        val.loc[:, [output_label]],
+        test.loc[:, [output_label]],
+    )
+    print(x_test)
+    x_test = torch.from_numpy(x_test.values)
+    print(x_test.float())
+    print(x_test.shape)
+    y_predicted = classifier.model(x_test.float())
+    conf_mat = confusion_matrix(y_predicted, y_test)
+    print("Confusion Matrix: \n", conf_mat)
+
+
 if __name__ == "__main__":
-    train_one_model()
+    # train_one_model()
+    test_load_model()
