@@ -17,10 +17,6 @@ hands = mpHands.Hands(max_num_hands=1, min_detection_confidence=0.7)
 mpDraw = mp.solutions.drawing_utils
 
 # Load the gesture recognizer models
-"""
-Utility function to load the trained regressor model in gesture_recongnition_model.pickle.
-"""
-# If you alter this, make sure it works in tandem with save_regressor
 with open("/Users/marcochan/Desktop/Github/Gesture-Control/Gesture-Control/gesture_recognition_model.pickle", "rb") as target:
     trained_model = pickle.load(target)
 print("\nLoaded model in gesture_recongnition_model.pickle\n")
@@ -32,10 +28,6 @@ label_map = {0: 'fist', 1: 'thumbs_down', 2: 'thumbs_up'}
 
 # Initialize the webcam
 cap = cv2.VideoCapture(0)
-# with open("/Users/marcochan/Desktop/Github/Gesture-Control/Gesture-Control/Data/fist.csv", "a") as text_file:
-#     for i in range(1,22):
-#         print("x"+str(i) + ",y"+str(i)+ ",z"+ str(i), file=text_file, end=",")
-#     print('\n', file=text_file, end="")
 
 while True:
     # Read each frame from the webcam
