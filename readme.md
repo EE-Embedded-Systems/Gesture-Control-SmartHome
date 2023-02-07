@@ -22,7 +22,7 @@ The only change required to make is the path to csv file to be written to.
 
 ## Train a NN Model
 
-Run the NN_Model.py file by `python NN_model.py`. It will start training the model and when its done, the model will be saved in the file `gesture_recognition_model.pickle`. Training loss record is saved in `out/33_2_512_1E-02.csv`.
+Run the NN_Model.py file by `train_python NN_model.py`. It will start training the model and when its done, the model will be saved in the file `gesture_recognition_model.pickle`. Training loss record is saved in `out/33_2_512_1E-02.csv`.
 
 This is a Multiclass Classification problem, so Cross-Entropy is used as for the loss function. `torch.nn.CrossEntropyLoss()` is used to calculate the cross-entropy loss. It takes in the input of probability of classes and the true label value. The ideal loss is log(number_of_gestures). 
 

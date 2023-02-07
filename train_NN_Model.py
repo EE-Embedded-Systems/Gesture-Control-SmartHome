@@ -22,13 +22,18 @@ else:
     print("GPU Not Detected")
     DEVICE = torch.device("cpu")
 
+
+# Dictionary for Gesture
+GESTURE_TO_VALUE_MAP = {'fist': 0, 'thumbs_down': 1,
+                        'thumbs_up': 2, 'one': 3, 'two': 4, 'three': 5, 'middle_finger': 6}
+
 ###
 # PyTorch Model
 ###
 
 
 class NeuralNetwork(nn.Module):
-    def __init__(self, neurons, inputs=63, outputs=3):
+    def __init__(self, neurons, inputs=63, outputs=len(GESTURE_TO_VALUE_MAP)):
         """Initializes a PyTorch multi-layer linear nueral network.
 
         Args:
@@ -391,14 +396,13 @@ def train_one_model():
     output_label = "label"
 
     # Use pandas to read CSV data as it contains various object types
-    fist_data = pd.read_csv("Data/fist.csv")
-    thumbs_down_data = pd.read_csv("Data/thumbs_down.csv")
-    thumbs_up_data = pd.read_csv("Data/thumbs_up.csv")
-    combined_data = pd.concat([fist_data, thumbs_down_data, thumbs_up_data])
+    combined_data = pd.DataFrame()
+    for key in GESTURE_TO_VALUE_MAP:
+        data = pd.read_csv("data/"+key+".csv")
+        combined_data = pd.concat([combined_data, data])
 
     # Changing label into values. This is to allow calculation of loss function with cross entropy
-    label_map = {'fist': 0, 'thumbs_down': 1, 'thumbs_up': 2}
-    combined_data['label'] = combined_data['label'].map(label_map)
+    combined_data['label'] = combined_data['label'].map(GESTURE_TO_VALUE_MAP)
 
     # Split Datasets into Train and Test DataSets
     train, val, test = split_dataset(combined_data)
@@ -445,14 +449,13 @@ def test_load_model():
 
     classifier = load_regressor()
     # Use pandas to read CSV data as it contains various object types
-    fist_data = pd.read_csv("Data/fist.csv")
-    thumbs_down_data = pd.read_csv("Data/thumbs_down.csv")
-    thumbs_up_data = pd.read_csv("Data/thumbs_up.csv")
-    combined_data = pd.concat([fist_data, thumbs_down_data, thumbs_up_data])
+    combined_data = pd.DataFrame()
+    for key in GESTURE_TO_VALUE_MAP:
+        data = pd.read_csv("data/"+key+".csv")
+        combined_data = pd.concat([combined_data, data])
 
     # Changing label into values. This is to allow calculation of loss function with cross entropy
-    label_map = {'fist': 0, 'thumbs_down': 1, 'thumbs_up': 2}
-    combined_data['label'] = combined_data['label'].map(label_map)
+    combined_data['label'] = combined_data['label'].map(GESTURE_TO_VALUE_MAP)
 
     # Split Datasets into Train and Test DataSets
     train, val, test = split_dataset(combined_data)
@@ -478,5 +481,5 @@ def test_load_model():
 
 
 if __name__ == "__main__":
-    # train_one_model()
-    test_load_model()
+    train_one_model()
+    # test_load_model()
