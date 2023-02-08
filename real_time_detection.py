@@ -24,7 +24,7 @@ print("\nLoaded model in gesture_recongnition_model.pickle\n")
 
 # Load class names
 label_map = {0: 'fist', 1: 'thumbs_down', 2: 'thumbs_up',
-             3: 'one', 4: 'two', 5: 'three', 6: 'middle finger'}
+             3: 'one', 4: 'two', 5: 'three', 6: 'fuck you dumbass'}
 
 
 # Initialize the webcam
