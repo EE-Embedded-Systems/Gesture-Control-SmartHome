@@ -6,17 +6,9 @@ from train_NN_Model import Classifier
 from train_NN_Model import NeuralNetwork
 import pandas as pd
 import numpy as np
-import mediapipe as mp
 import pickle
-import tensorflow as tf
 import torch
 import json
-import csv
-
-# initialize mediapipe
-mpHands = mp.solutions.hands
-hands = mpHands.Hands(max_num_hands=1, min_detection_confidence=0.7)
-mpDraw = mp.solutions.drawing_utils
 
 # Load the gesture recognizer models
 with open("/Users/marcochan/Desktop/Github/Gesture-Control/Gesture-Control/gesture_recognition_model.pickle", "rb") as target:

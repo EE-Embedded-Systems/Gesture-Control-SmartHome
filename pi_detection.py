@@ -51,7 +51,8 @@ while True:
         # HTTP post request
         data = {'coordinates': landmarks}
         response = requests.post(
-            'https://your-server.com/receive_coordinates.php', json=data)
+            'http://bananatechnology.online/pi/scripts/update_coordinates.php', json=data)
+        print(response.text)
         if response.status_code == 200:
             print('Coordinates sent successfully')
         else:
