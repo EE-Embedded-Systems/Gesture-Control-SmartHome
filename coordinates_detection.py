@@ -10,6 +10,7 @@ import mediapipe as mp
 import pickle
 import tensorflow as tf
 import torch
+import json
 import csv
 
 # initialize mediapipe
@@ -27,19 +28,18 @@ print("\nLoaded model in gesture_recongnition_model.pickle\n")
 label_map = {0: 'fist', 1: 'thumbs_down', 2: 'thumbs_up',
              3: 'one', 4: 'two', 5: 'three', 6: 'fuck you dumbass'}
 
-reader = pd.read_csv(
-    '/Users/marcochan/Desktop/Github/Gesture-Control/Gesture-Control/data/test_data.csv')
-for index, row in reader.iterrows():
+with open('coordinates.json') as f:
+    coordinates = json.load(f)
 
-    landmarks = np.array(row)
-    reshaped_landmarks = landmarks.reshape(1, 63)
-    torch_landmarks = torch.from_numpy(reshaped_landmarks)
+landmarks = np.array(coordinates)
+reshaped_landmarks = landmarks.reshape(1, 63)
+torch_landmarks = torch.from_numpy(reshaped_landmarks)
 
-    # Predict gesture
-    y_predicted = trained_model.model(torch_landmarks.float())
+# Predict gesture
+y_predicted = trained_model.model(torch_landmarks.float())
 
-    # print(prediction)
-    classID = np.argmax(y_predicted.detach().numpy())
-    className = label_map[classID]
+# print(prediction)
+classID = np.argmax(y_predicted.detach().numpy())
+className = label_map[classID]
 
-    print(index, " ", className)
+print(className)
