@@ -303,7 +303,13 @@ class Classifier:
 
         # Calculate Loss
         y_predicted = self.model(x.float())
-        return loss_fn(y_predicted, y.long().squeeze())
+        takeSpecificColumnValues = y_predicted[
+            torch.arange(y_predicted.size(0)), y.squeeze()]
+        epsilon = 1e-8
+        labelSmoothing = takeSpecificColumnValues + epsilon
+        meanCrossEntropyLoss = (-np.log(
+            (labelSmoothing.detach().numpy()))).mean()
+        return meanCrossEntropyLoss
 
     def _create_optimiser(self, name):
         """
@@ -425,7 +431,7 @@ def train_one_model():
     # to make sure the model isn't overfitting
     classifier = Classifier(
         x_train,
-        batch_size=512,
+        batch_size=256,
         learning_rate=0.01,
         optimiser="sgd",
         nb_epoch=3000,
