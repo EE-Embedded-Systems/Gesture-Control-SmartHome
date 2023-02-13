@@ -431,7 +431,7 @@ def train_one_model():
     # to make sure the model isn't overfitting
     classifier = Classifier(
         x_train,
-        batch_size=256,
+        batch_size=512,
         learning_rate=0.01,
         optimiser="sgd",
         nb_epoch=3000,
