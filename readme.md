@@ -1,4 +1,4 @@
-# Using nn to classify detected hand gesture
+# Using Deep Neural Network to classify detected hand gesture
 
 
 ## Dependancies
