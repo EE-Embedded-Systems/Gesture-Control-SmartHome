@@ -9,7 +9,7 @@ hands = mpHands.Hands(max_num_hands=1, min_detection_confidence=0.7)
 mpDraw = mp.solutions.drawing_utils
 
 
-GESTURE = "three"
+GESTURE = "five"
 
 # Initialize the webcam
 cap = cv2.VideoCapture(0)

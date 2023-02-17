@@ -25,7 +25,7 @@ else:
 
 # Dictionary for Gesture
 GESTURE_TO_VALUE_MAP = {'fist': 0, 'thumbs_down': 1,
-                        'thumbs_up': 2, 'one': 3, 'two': 4, 'three': 5, 'middle_finger': 6}
+                        'thumbs_up': 2, 'one': 3, 'two': 4, 'three': 5, 'left': 6, 'right': 7}
 
 ###
 # PyTorch Model
@@ -209,7 +209,7 @@ class Classifier:
         # Initialize Loss Function, Optimizer and Stopper.
         criterion = torch.nn.CrossEntropyLoss()
         optimiser = self._create_optimiser(self.optimiser)
-        stopper = EarlyStopper(patience=10)
+        stopper = EarlyStopper(patience=100)
 
         # Train
         logger = LossLogger()
@@ -403,6 +403,7 @@ def train_one_model():
 
     # Use pandas to read CSV data as it contains various object types
     combined_data = pd.DataFrame()
+    print('length:', len(GESTURE_TO_VALUE_MAP))
     for key in GESTURE_TO_VALUE_MAP:
         data = pd.read_csv("data/"+key+".csv")
         combined_data = pd.concat([combined_data, data])
@@ -432,7 +433,7 @@ def train_one_model():
     classifier = Classifier(
         x_train,
         batch_size=512,
-        learning_rate=0.01,
+        learning_rate=0.03,
         optimiser="sgd",
         nb_epoch=3000,
         neurons=[33, 33],

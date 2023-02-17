@@ -1,0 +1,6 @@
+mediapipe
+tensorflow
+cvzone
+opencv-python
+torch
+scikit-learn
