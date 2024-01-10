@@ -1,5 +1,8 @@
 # Using Deep Neural Network to classify detected hand gesture
 
+In this project, we trained a neural network model to use hand gestures for controlling electronic appliances. The neural network can detect various hand gestures as commands. We built a prototype of the controls mechanism. Please checkout our demo below to see how the prototype works!
+
+Link to Demo: https://imperiallondon-my.sharepoint.com/:v:/r/personal/jkw20_ic_ac_uk/Documents/Imperial/Yr3/ES/Low%20Res%20-%20Embedded.mp4?csf=1&web=1&e=TW8Zcb&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D
 
 ## Dependancies
 
